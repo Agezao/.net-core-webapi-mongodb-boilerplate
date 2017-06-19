@@ -32,9 +32,7 @@ namespace webapi_boilerplate.Controllers
         public Response<User> Get(string id)
         {
             var response  = new Response<User>();
-
             response.Data = serviceManager.UserService.Find(ObjectId.Parse(id));
-
             return response;
         }
 
@@ -43,24 +41,38 @@ namespace webapi_boilerplate.Controllers
         public Response<List<User>> GetSearch(string id = null, string name = "", string email = "")
         {
             var response  = new Response<List<User>>();
-
             response.Data = serviceManager.UserService.List(new User{ 
                     Id = id, 
                     Name = name, 
                     Email = email 
                 });
-
             return response;
         }
 
-        // POST api/values
+        // POST api/users
         [HttpPost]
         public Response<User> Post([FromBody]User model)
         {
             var response  = new Response<User>();
-
             response.Data = serviceManager.UserService.Create(model);
+            return response;
+        }
 
+        // PUT api/users
+        [HttpPut]
+        public Response<User> Put([FromBody]User model)
+        {
+            var response  = new Response<User>();
+            response.Data = serviceManager.UserService.Update(ObjectId.Parse(model.Id), model);
+            return response;
+        }
+
+        // DELETE api/users/5
+        [HttpDelete("{id}")]
+        public Response<int> Delete(string id)
+        {
+            var response  = new Response<int>();
+            response.Data = serviceManager.UserService.Delete(ObjectId.Parse(id));
             return response;
         }
     }
