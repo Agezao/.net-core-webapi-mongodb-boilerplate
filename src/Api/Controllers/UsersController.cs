@@ -38,6 +38,21 @@ namespace webapi_boilerplate.Controllers
             return response;
         }
 
+        // GET api/users/search
+        [HttpGet("search")]
+        public Response<List<User>> GetSearch(string id = null, string name = "", string email = "")
+        {
+            var response  = new Response<List<User>>();
+
+            response.Data = serviceManager.UserService.List(new User{ 
+                    Id = id, 
+                    Name = name, 
+                    Email = email 
+                });
+
+            return response;
+        }
+
         // POST api/values
         [HttpPost]
         public Response<User> Post([FromBody]User model)

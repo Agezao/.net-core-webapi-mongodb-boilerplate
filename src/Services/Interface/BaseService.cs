@@ -27,6 +27,13 @@ namespace Services.Interface
             return model;
         }
 
+        public T Update(ObjectId id, T model)
+        {
+            this._ctx.ReplaceOne(Builders<T>.Filter.Eq("_id", id), model);
+
+            return model;
+        }
+
         public int Delete(ObjectId id)
         {
             var result = this._ctx.DeleteOne(Builders<T>.Filter.Eq("_id", id));

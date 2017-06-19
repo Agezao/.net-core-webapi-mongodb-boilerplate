@@ -1,21 +1,25 @@
 using System;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Models
 {
     [Serializable]
     public class Article
     {
-        public ObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)] 
+        public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime LastChange { get; set; }
         public DateTime Created { get; set; }
 
-        public ObjectId UserId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)] 
+        public string UserId { get; set; }
         public User User { get; set; }
 
-        public ObjectId TopicId { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)] 
+        public string TopicId { get; set; }
         public Topic Topic { get; set; }
     }
 }

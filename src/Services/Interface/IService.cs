@@ -23,6 +23,13 @@ namespace Services.Interface
         int Delete(ObjectId id);
 
         /// <summary>
+        /// Update received Model
+        /// </summary>
+        /// <param name="model">The Model to be updated</param>
+        /// <returns>Updated record</returns>
+        T Update(ObjectId id, T model);
+
+        /// <summary>
         /// Find entity by Id
         /// </summary>
         /// <param name="id">Id of the item</param>
