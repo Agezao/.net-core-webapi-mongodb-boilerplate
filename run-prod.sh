@@ -1,0 +1,1 @@
+dotnet src\Api\bin\Release\netcoreapp2.0\win7-x64\publish\webapi-boilerplate.dll
