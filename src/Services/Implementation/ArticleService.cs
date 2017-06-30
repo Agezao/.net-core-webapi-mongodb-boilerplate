@@ -5,7 +5,7 @@ using Services.Interface;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System.Collections.Generic;
-
+using MongoDB.Bson;
 
 namespace Services.Implementation
 {
@@ -19,6 +19,37 @@ namespace Services.Implementation
                         .ToList();
 
             return objs;
+        }
+
+        public override List<Article> ListAll()
+        {
+            var response = base.ListAll();
+
+            if (response != null && response.Count > 0)
+                response.ForEach(a => {
+                    a = Populate(a);
+                });
+
+            return response;
+        }
+
+        public override Article Find(ObjectId id)
+        {
+            var result = base.Find(id);
+            result = Populate(result);
+
+            return result;
+        }
+
+        private Article Populate(Article model) {
+
+            var topicService = new TopicService(base._db);
+            var userService = new UserService(base._db);
+
+            model.User = userService.Find(ObjectId.Parse(model.UserId));
+            model.Topic = topicService.Find(ObjectId.Parse(model.TopicId));
+
+            return model;
         }
     }
 }

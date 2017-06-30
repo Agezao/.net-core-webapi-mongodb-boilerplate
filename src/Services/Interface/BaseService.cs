@@ -11,7 +11,7 @@ namespace Services.Interface
 {
     public abstract class BaseService<T> : IService<T>
     {
-        private IMongoDatabase _db { get; }
+        protected IMongoDatabase _db { get; }
         protected IMongoCollection<T> _ctx { get; }
 
         public BaseService(IMongoDatabase db, string collectionName)
