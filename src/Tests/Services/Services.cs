@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Services;
 
-namespace Tests
+namespace Tests.Services
 {
     [TestClass]
     public class ServicesTest
